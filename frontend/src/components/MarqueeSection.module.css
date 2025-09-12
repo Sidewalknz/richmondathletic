@@ -1,0 +1,42 @@
+/* Section container */
+.marqueeSection {
+  background: var(--black);
+  color: var(--white);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+/* Moving track */
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+/* Text style */
+.text {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  color: #333333;;
+  -webkit-text-stroke: 2px #333333;;
+  margin: 0;
+  padding-right: 4rem; /* spacing between repeats */
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Keyframes for continuous scroll */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
