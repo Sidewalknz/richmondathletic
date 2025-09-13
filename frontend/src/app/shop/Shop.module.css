@@ -1,0 +1,188 @@
+/* Page frame */
+.page {
+  position: relative;
+  background: var(--white);
+  color: var(--black);
+  min-height: 100dvh;
+  padding-top: 90px; /* room for fixed navbar */
+  display: block;
+}
+
+/* Header band (black, subtle texture) */
+.header {
+  position: relative;
+  background: var(--black);
+  color: var(--white);
+  padding: 2.5rem 1.5rem;
+  border-top: 6px solid var(--black);
+  overflow: hidden;
+  font-family: var(--font-oswald), sans-serif;
+}
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 0 40px,
+    transparent 40px 100px
+  );
+  opacity: 0.14;
+  pointer-events: none;
+}
+.headerInner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.title {
+  margin: 0 0 0.35rem 0;
+  line-height: 1;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.outline {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  color: white;
+  letter-spacing: 0.12em;
+}
+.solid {
+  font-size: clamp(1.4rem, 3.5vw, 2.25rem);
+  letter-spacing: 0.04em;
+}
+.tagline {
+  margin: 0 0 0.75rem 0;
+  opacity: 0.95;
+}
+
+/* Big order email CTA (top) */
+.emailBar {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background: var(--red);
+  color: var(--white);
+  border: 2px solid var(--white);
+  padding: 0.55rem 0.9rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 900;
+  border-radius: 0;
+  transition: opacity 0.2s ease, transform 0.08s ease;
+}
+.emailBar:hover { opacity: 0.92; }
+.emailBar:active { transform: translateY(1px); }
+
+/* Content width cap */
+.inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 1.5rem auto 3.5rem;
+  padding: 0 1.5rem;
+}
+
+/* Product grid */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Card */
+.card {
+  position: relative;
+  border: 2px solid var(--black);
+  background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+
+/* Media */
+.media {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(234,34,37,0.08), rgba(234,34,37,0.02)),
+    repeating-linear-gradient(90deg, rgba(33,33,33,0.05) 0 40px, transparent 40px 100px);
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Meta */
+.meta {
+  padding: 0.85rem 0.9rem 1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+.name {
+  margin: 0;
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+}
+.noteSmall {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Prices (no buttons) */
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.price {
+  font-weight: 800;
+  font-family: var(--font-oswald), sans-serif;
+}
+.priceChips {
+  display: inline-flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.chip {
+  border: 2px solid var(--black);
+  padding: 0.2rem 0.45rem;
+  border-radius: 0;
+  font-size: 0.85rem;
+  background: #fff;
+}
+
+/* Bottom email strip CTA */
+.ctaStrip {
+  display: block;
+  margin-top: 2rem;
+  text-align: center;
+  background: var(--red);
+  color: var(--white);
+  border: 2px solid var(--black);
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 900;
+  border-radius: 0;
+  transition: opacity 0.2s ease, transform 0.08s ease;
+}
+.ctaStrip:hover { opacity: 0.92; }
+.ctaStrip:active { transform: translateY(1px); }
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .header { padding: 2.25rem 1rem; }
+  .inner { padding: 0 1rem; }
+}
