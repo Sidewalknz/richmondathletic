@@ -47,13 +47,6 @@ export default function DevelopmentProgramme() {
                 <li>
                   <strong>Cost:</strong> <strong>$80 per term</strong>.
                 </li>
-                <li>
-                  <strong>Contact:</strong>{" "}
-                  <a href="mailto:admin@richmondathletic.co.nz">
-                    admin@richmondathletic.co.nz
-                  </a>{" "}
-                  (<span className={styles.nowrap}>Cherie</span>).
-                </li>
               </ul>
 
               <div className={styles.ctas}>
@@ -63,12 +56,6 @@ export default function DevelopmentProgramme() {
                 >
                   Register Interest
                 </Link>
-                <a
-                  href="mailto:admin@richmondathletic.co.nz"
-                  className={styles.secondaryCta}
-                >
-                  Email Cherie
-                </a>
               </div>
             </div>
           </div>
