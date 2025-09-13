@@ -30,8 +30,6 @@ const items = [
     icon: "/icons/stripes.svg",
     title: "Our Club United As One",
     text: "A stripe for every grade of football played at RFC.",
-    small:
-      "1st Kicks • Fun Football • Junior • Youth • Senior Men’s • Senior Women’s • Masters",
   },
 ];
 
@@ -39,10 +37,10 @@ export default function BadgeInfo() {
   return (
     <section className={styles.section} id="badge-info">
       <div className={styles.inner}>
-        <div className={styles.scroller}>
-          <ul className={styles.grid}>
-            {items.map(({ icon, title, text, small }) => (
-              <li key={title} className={styles.card}>
+        <div className={styles.wrap}>
+          <ul className={styles.cols}>
+            {items.map(({ icon, title, text }) => (
+              <li key={title} className={styles.col}>
                 <div className={styles.iconWrap}>
                   <Image
                     src={icon}
@@ -54,7 +52,6 @@ export default function BadgeInfo() {
                 </div>
                 <h3 className={styles.title}>{title}</h3>
                 <p className={styles.text}>{text}</p>
-                {small && <p className={styles.small}>{small}</p>}
               </li>
             ))}
           </ul>

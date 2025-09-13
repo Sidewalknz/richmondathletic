@@ -1,0 +1,244 @@
+/* Section shell */
+.section {
+  position: relative;
+  background: var(--white);
+  color: var(--black);
+  padding: 4.25rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  border-top: 6px solid var(--black);
+  overflow: hidden;
+}
+
+/* light club stripes in background */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(33,33,33,0.06) 0 40px,
+    transparent 40px 100px
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* width cap */
+.inner {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/* Header (lower stack so image can pass in front) */
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  line-height: 0.9;
+  display: block;
+}
+
+/* TITLE: no stroke — solid text only */
+.outline {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 4rem;
+  color: var(--black);
+  letter-spacing: 0.02em;
+  font-weight: 900;
+  display: block;
+}
+
+.solid {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 2.25rem;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  display: block;
+  margin-top: 0.4rem;
+}
+
+/* Grid: left copy, right visual */
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Left — stays above image & header when overlapping */
+.left {
+  align-self: start;
+  position: relative;
+  z-index: 6; /* keep copy & card above the image */
+}
+
+.lead {
+  font-family: var(--font-oswald), sans-serif;
+  line-height: 1.65;
+  font-size: 1.05rem;
+  margin: 0 0 1.5rem 0;
+}
+
+/* Key Details card */
+.card {
+  position: relative;
+  z-index: 7; /* ensure card is above everything */
+  border: 2px solid var(--black);
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+  padding: 1.25rem 1.25rem 1rem;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+.cardTitle {
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--red);
+  margin: 0 0 0.75rem 0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.list li { line-height: 1.55; }
+.list a {
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, opacity 0.2s ease;
+}
+.list a:hover { border-color: var(--red); opacity: 0.9; }
+.nowrap { white-space: nowrap; }
+
+/* CTAs */
+.ctas {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.primaryCta {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.7rem 1.2rem;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 800;
+  border: 2px solid var(--black);
+  text-decoration: none;
+  transition: transform 0.08s ease, opacity 0.2s ease, background 0.2s ease;
+}
+.primaryCta:hover { opacity: 0.92; }
+.primaryCta:active { transform: translateY(1px); }
+
+.secondaryCta {
+  color: var(--black);
+  border: 2px solid var(--black);
+  background: transparent;
+  padding: 0.7rem 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  border-radius: 0;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+.secondaryCta:hover { background: rgba(0,0,0,0.06); }
+
+/* Right visual — lifted and layered to overlap header */
+.right {
+  position: relative;
+  z-index: 5; /* above header (2), below left/card (6/7) */
+}
+
+.visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 520px;
+
+  /* pull the visual upward so it overlaps the title */
+  transform: translateY(-40px);
+}
+
+/* White radial patch */
+.radial {
+  position: absolute;
+  width: 680px;
+  height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(255,255,255,0.98) 0%,
+    rgba(255,255,255,0.98) 62%,
+    rgba(255,255,255,0.6) 72%,
+    rgba(255,255,255,0.25) 80%,
+    rgba(255,255,255,0) 86%
+  );
+  z-index: 0;
+  transform: translateY(10px);
+}
+
+/* Ground shadow */
+.groundShadow {
+  position: absolute;
+  bottom: -12px;
+  width: 560px;
+  height: 120px;
+  background: radial-gradient(
+    50% 60% at 50% 50%,
+    rgba(0,0,0,0.35) 0%,
+    rgba(0,0,0,0.18) 45%,
+    rgba(0,0,0,0) 70%
+  );
+  filter: blur(10px);
+  transform: translateY(6px);
+  z-index: 0;
+}
+
+/* Player image — sits in front of the header */
+.player {
+  position: relative;
+  z-index: 5; /* > header (2); < left/card (6/7) */
+  width: 520px;
+  height: auto;
+  filter: drop-shadow(0 24px 32px rgba(0,0,0,0.35));
+}
+
+/* Responsive (unchanged) */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .right { order: 2; }
+  .left { order: 1; }
+  .visual { min-height: 420px; transform: none; }
+  .radial { width: 520px; height: 520px; }
+  .player { width: 420px; }
+  .groundShadow { width: 520px; height: 120px; }
+}
+
+@media (max-width: 640px) {
+  .section { padding: 3.25rem 1rem; }
+  .radial { width: 420px; height: 420px; }
+  .player { width: 360px; }
+  .groundShadow { width: 440px; height: 110px; }
+}

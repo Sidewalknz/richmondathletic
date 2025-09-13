@@ -17,8 +17,16 @@ export default function Hero() {
         <h1 aria-hidden className={styles.bigWord}>STRIVE</h1>
 
         {/* Player */}
-        <div className={styles.playerWrap}>
+        <div
+          className={styles.playerWrap}
+          // provide the player image as a CSS variable for mask
+          style={{ "--player-url": "url('/images/player.png')" }}
+        >
           <div className={styles.groundShadow} aria-hidden></div>
+
+          {/* Black silhouette behind the player (masked from the same PNG) */}
+          <div className={styles.playerSilhouette} aria-hidden />
+
           <Image
             src="/images/player.png"
             alt="Richmond FC player"

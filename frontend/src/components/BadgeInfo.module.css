@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+  font-family: var(--font-oswald), sans-serif; /* all text Oswald */
 }
 .section::before {
   content: "";
@@ -26,87 +27,83 @@
   z-index: 1;
 }
 
-/* Keep a single row with horizontal scroll on small screens */
-.scroller {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem; /* space for scrollbar */
+/* Wrapper (kept for symmetry; no scrolling) */
+.wrap {
+  overflow: visible;
 }
 
-/* One-row layout by default (flex, no wrap) */
-.grid {
+/* ---------- Mobile-first: ONE vertical column ---------- */
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;    /* single column on mobile */
+  row-gap: 1.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 2rem;
 }
 
-/* Cards: centered content */
-.card {
-  position: relative;
-  flex: 0 0 260px; /* min width per column on small screens */
-  padding: 1rem 0.5rem 0.25rem;
-  text-align: center; /* ⬅ center align everything */
+.col {
+  display: grid;
+  grid-template-rows: auto auto auto; /* icon, title, text */
+  align-items: start;
+  text-align: center;
+  padding: 1rem 0.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
 }
-
-/* vertical separators */
-.card + .card::before {
-  content: "";
-  position: absolute;
-  left: -1rem;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  width: 2px;
-  background: rgba(255,255,255,0.16);
+.col:last-child {
+  border-bottom: none;
 }
 
 /* Icon */
-.iconWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.75rem;
-}
-.icon {
-  display: block;
-  width: 88px;
-  height: 88px;
-}
+.iconWrap { display: flex; justify-content: center; align-items: center; margin-bottom: 0.6rem; }
+.icon { width: 72px; height: 72px; display: block; }
 
 /* Title */
 .title {
-  font-family: var(--font-oswald), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 700;
+  font-size: clamp(1rem, 4.2vw, 1.125rem);
   line-height: 1.1;
   margin: 0 0 0.35rem 0;
 }
 
-/* Copy */
+/* Text */
 .text {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 3.7vw, 0.95rem);
   line-height: 1.55;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
-.small {
-  margin: 0.35rem 0 0 0;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  opacity: 0.85;
-}
-
-/* On wider screens: exact 5 equal columns, no scrolling */
+/* ---------- Tablet/Desktop: FIVE equal columns ---------- */
 @media (min-width: 1060px) {
-  .scroller { overflow: visible; padding-bottom: 0; }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* ⬅ five equal columns */
-    gap: 2rem;
+  .cols {
+    grid-template-columns: repeat(5, 1fr); /* five columns */
+    column-gap: 2rem;
+    row-gap: 0;
   }
-  .card { flex: 0 0 auto; }
+  .col {
+    border-bottom: none;
+    padding: 0.5rem 0.25rem;
+    position: relative;
+  }
+  /* subtle vertical separators between columns */
+  .col + .col::before {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: rgba(255,255,255,0.16);
+  }
+  .icon { width: 88px; height: 88px; }
+  .title { font-size: clamp(1rem, 1.8vw, 1.25rem); }
+  .text  { font-size: 0.95rem; }
+}
+
+/* Small phones fine-tuning */
+@media (max-width: 360px) {
+  .icon { width: 64px; height: 64px; }
 }
