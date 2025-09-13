@@ -13,20 +13,22 @@ export default function Hero() {
 
       {/* Capped content */}
       <div className={styles.inner}>
-        {/* STRIVE behind player */}
-        <h1 aria-hidden className={styles.bigWord}>STRIVE</h1>
+        {/* STRIVE 5-line converge/diverge animation */}
+        <div aria-hidden className={styles.bigWordGroup}>
+          <span className={`${styles.bigWord} ${styles.row1}`}>STRIVE</span>
+          <span className={`${styles.bigWord} ${styles.row2}`}>STRIVE</span>
+          <span className={`${styles.bigWord} ${styles.row3}`}>STRIVE</span>
+          <span className={`${styles.bigWord} ${styles.row4}`}>STRIVE</span>
+          <span className={`${styles.bigWord} ${styles.row5}`}>STRIVE</span>
+        </div>
 
         {/* Player */}
         <div
           className={styles.playerWrap}
-          // provide the player image as a CSS variable for mask
           style={{ "--player-url": "url('/images/player.png')" }}
         >
           <div className={styles.groundShadow} aria-hidden></div>
-
-          {/* Black silhouette behind the player (masked from the same PNG) */}
           <div className={styles.playerSilhouette} aria-hidden />
-
           <Image
             src="/images/player.png"
             alt="Richmond FC player"

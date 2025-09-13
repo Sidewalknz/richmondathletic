@@ -15,7 +15,6 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/club", label: "Club" },
     { href: "/shop", label: "Shop" },
-    { href: "/sponsors", label: "Sponsors" },
   ];
 
   useEffect(() => {

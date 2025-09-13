@@ -1,0 +1,189 @@
+/* Section shell (black with subtle dark stripes for texture) */
+.section {
+  position: relative;
+  background: var(--black);
+  color: var(--white);
+  padding: 3.25rem 1.5rem;
+  border-top: 6px solid var(--black);
+  overflow: hidden;
+  font-family: var(--font-oswald), sans-serif;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0.04) 0 40px,
+    transparent 40px 100px
+  );
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* Width cap */
+.inner {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.outline {
+  font-size: clamp(1.75rem, 4.8vw, 3rem);
+  color: white;
+  letter-spacing: 0.12em;
+}
+
+.solid {
+  font-size: clamp(1.25rem, 3.2vw, 2rem);
+}
+
+/* CTA */
+.becomeCta {
+  background: var(--red);
+  color: var(--white);
+  padding: 0.55rem 1rem;
+  border: 2px solid var(--white);
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.08s ease;
+}
+.becomeCta:hover { opacity: 0.9; }
+.becomeCta:active { transform: translateY(1px); }
+
+/* Viewport: fades edges with a mask so logos don't hard-cut */
+.viewport {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 0;
+  /* Edge fade using mask */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* Rows */
+.row {
+  position: relative;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  will-change: transform;
+  user-select: none;
+}
+
+/* The moving track inside each row */
+.track {
+  display: inline-flex;
+  gap: 2.25rem;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* pause on hover of the entire section */
+}
+.section:hover .track {
+  animation-play-state: paused;
+}
+
+/* Row directions & speeds */
+.rowA .track { animation-name: marquee-left;  animation-duration: 36s; }
+.rowB .track { animation-name: marquee-right; animation-duration: 46s; }
+
+/* Logos */
+.logoWrap { display: inline-flex; align-items: center; justify-content: center; }
+.logo {
+  height: 56px;           /* consistent height */
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1); /* make most SVGs/PNGs white on dark */
+  opacity: 0.95;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.logoWrap:hover .logo { transform: translateY(-2px); opacity: 1; }
+
+/* Marquee keyframes */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* because we doubled content */
+}
+@keyframes marquee-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(50%); }
+}
+
+/* Note */
+.note {
+  margin: 0.75rem 0 0 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  text-align: center;
+}
+
+/* Reduced motion: show a tidy grid instead of animation */
+@media (prefers-reduced-motion: reduce) {
+  .viewport { -webkit-mask-image: none; mask-image: none; }
+  .row { display: none; }
+  .viewport::after {
+    content: "";
+    display: block;
+  }
+  .viewport {
+    overflow: visible;
+    padding: 0;
+  }
+  .viewport + .note { margin-top: 1rem; }
+  .inner::after { /* grid container */
+    content: "";
+    display: block;
+  }
+  /* Simple grid of logos */
+  .section .gridFallback {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(140px, 1fr));
+    gap: 1.25rem 2rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .logo { height: 48px; }
+}
+@media (max-width: 640px) {
+  .section { padding: 2.75rem 1rem; }
+  .header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+}

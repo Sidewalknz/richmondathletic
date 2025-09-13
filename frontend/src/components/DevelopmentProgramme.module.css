@@ -6,7 +6,6 @@
   padding: 4.25rem 1.5rem;
   display: flex;
   justify-content: center;
-  border-top: 6px solid var(--black);
   overflow: hidden;
 }
 

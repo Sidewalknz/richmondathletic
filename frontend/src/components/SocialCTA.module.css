@@ -1,0 +1,116 @@
+/* Section shell (now red) */
+.section {
+  position: relative;
+  background: var(--red);
+  color: var(--white);
+  padding: 3.5rem 1.5rem;
+  border-top: 6px solid var(--black);
+  overflow: hidden;
+  font-family: var(--font-oswald), sans-serif;
+}
+
+/* subtle dark stripes for texture on red */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0,0,0,0.08) 0 40px,
+    transparent 40px 100px
+  );
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* width cap */
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* header */
+.header { margin: 0 0 1.25rem 0; }
+.title {
+  margin: 0 0 0.35rem 0;
+  line-height: 1;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.outline {
+  font-size: clamp(1.9rem, 4.8vw, 3rem);
+  color: white;
+  letter-spacing: 0.12em;
+}
+.solid {
+  font-size: clamp(1.25rem, 3.2vw, 2rem);
+}
+.lead {
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+/* tiles */
+.tiles {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.tile {
+  border: 2px solid var(--white);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  transition: transform 0.08s ease, opacity 0.2s ease, background 0.2s ease;
+}
+.tile:hover { opacity: 0.95; transform: translateY(-2px); }
+
+/* tile content */
+.link {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  color: var(--white);
+  text-decoration: none;
+}
+.iconWrap { display: grid; place-items: center; width: 44px; height: 44px;}
+.icon { display: block; width: 24px; height: 24px; filter: invert(1) brightness(0); }
+
+/* meta */
+.meta { display: grid; gap: 2px; }
+.network {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.handle { font-size: 0.95rem; opacity: 0.95; }
+
+/* CTA chip */
+.cta {
+  border: 2px solid var(--white);
+  padding: 0.45rem 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* responsive */
+@media (max-width: 860px) {
+  .tiles { grid-template-columns: 1fr; }
+  .lead { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .section { padding: 3rem 1rem; }
+}
