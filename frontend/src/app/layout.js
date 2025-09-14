@@ -1,5 +1,5 @@
 // src/app/layout.js
-import { Geist, Geist_Mono, Oswald } from "next/font/google";
+import { Geist, Geist_Mono, Oswald, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
@@ -19,6 +19,12 @@ const oswald = Oswald({
   weight: ["400", "500", "600", "700"],
 });
 
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata = {
   title: "Richmond Athletic",
   description: "Official website for Richmond Athletic Football Club",
@@ -27,7 +33,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} ${montserrat.variable}`}
+      >
         <Navbar />
         <main>{children}</main>
       </body>

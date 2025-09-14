@@ -63,8 +63,6 @@
   display: inline-block;
   margin-top: 0.5rem;
   background: var(--red);
-  color: var(--white);
-  border: 2px solid var(--white);
   padding: 0.55rem 0.9rem;
   text-decoration: none;
   text-transform: uppercase;

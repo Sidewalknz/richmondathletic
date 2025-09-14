@@ -1,5 +1,10 @@
+/* src/components/SponsorsSection.module.css */
+
 /* Section shell (black with subtle dark stripes for texture) */
 .section {
+  --gap: 2.25rem;
+  --scroll-speed: 40s;
+
   position: relative;
   background: var(--black);
   color: var(--white);
@@ -63,7 +68,6 @@
   background: var(--red);
   color: var(--white);
   padding: 0.55rem 1rem;
-  border: 2px solid var(--white);
   border-radius: 0;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -79,7 +83,6 @@
   position: relative;
   overflow: hidden;
   padding: 0.75rem 0;
-  /* Edge fade using mask */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -96,53 +99,59 @@
   );
 }
 
-/* Rows */
-.row {
-  position: relative;
-  white-space: nowrap;
+/* One continuous track */
+.track {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  gap: var(--gap);
+  flex-wrap: nowrap;            /* never wrap to a new line */
   will-change: transform;
-  user-select: none;
+  animation-name: scroll-left;
+  animation-duration: var(--scroll-speed);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  width: max-content;           /* size to content width */
 }
 
-/* The moving track inside each row */
-.track {
-  display: inline-flex;
-  gap: 2.25rem;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  /* pause on hover of the entire section */
-}
+/* --- Pause behavior ---------------------------------------------- */
+/* Fallback (older browsers): pause if the whole section is hovered */
 .section:hover .track {
   animation-play-state: paused;
 }
 
-/* Row directions & speeds */
-.rowA .track { animation-name: marquee-left;  animation-duration: 36s; }
-.rowB .track { animation-name: marquee-right; animation-duration: 46s; }
+/* Modern browsers: pause ONLY when a logo is hovered or focused.
+   This overrides the fallback rule above. */
+@supports selector(:has(.x)) {
+  .section:hover .track { animation-play-state: running; } /* undo fallback */
+  .track:has(.logoWrap:hover),
+  .track:has(.logoWrap:focus-within) {
+    animation-play-state: paused;
+  }
+}
+/* ----------------------------------------------------------------- */
 
 /* Logos */
-.logoWrap { display: inline-flex; align-items: center; justify-content: center; }
+.logoWrap {
+  flex: 0 0 auto;               /* prevent shrinking/wrapping */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .logo {
-  height: 56px;           /* consistent height */
+  height: 56px;                 /* consistent height */
   width: auto;
   display: block;
   filter: brightness(0) invert(1); /* make most SVGs/PNGs white on dark */
   opacity: 0.95;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
-.logoWrap:hover .logo { transform: translateY(-2px); opacity: 1; }
+.logoWrap:hover .logo,
+.logoWrap:focus-within .logo { transform: translateY(-2px); opacity: 1; }
 
-/* Marquee keyframes */
-@keyframes marquee-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* because we doubled content */
-}
-@keyframes marquee-right {
-  from { transform: translateX(0); }
-  to   { transform: translateX(50%); }
+/* Seamless marquee keyframes */
+@keyframes scroll-left {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 /* Note */
@@ -154,24 +163,14 @@
 }
 
 /* Reduced motion: show a tidy grid instead of animation */
+.gridFallback {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .viewport { -webkit-mask-image: none; mask-image: none; }
-  .row { display: none; }
-  .viewport::after {
-    content: "";
-    display: block;
-  }
-  .viewport {
-    overflow: visible;
-    padding: 0;
-  }
-  .viewport + .note { margin-top: 1rem; }
-  .inner::after { /* grid container */
-    content: "";
-    display: block;
-  }
-  /* Simple grid of logos */
-  .section .gridFallback {
+  .viewport { -webkit-mask-image: none; mask-image: none; padding: 0; }
+  .track { display: none; }
+  .gridFallback {
     display: grid;
     grid-template-columns: repeat(5, minmax(140px, 1fr));
     gap: 1.25rem 2rem;

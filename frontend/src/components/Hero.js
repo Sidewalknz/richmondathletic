@@ -7,36 +7,43 @@ import styles from "./Hero.module.css";
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      {/* Full width backgrounds */}
-      <div className={styles.stripes}></div>
-      <div className={styles.vignette}></div>
+      {/* Full-screen background stripes */}
+      <div className={styles.stripes} aria-hidden></div>
+      {/* Optional global edge vignette */}
+      <div className={styles.vignette} aria-hidden></div>
 
       {/* Capped content */}
       <div className={styles.inner}>
-        {/* STRIVE 5-line converge/diverge animation */}
-        <div aria-hidden className={styles.bigWordGroup}>
-          <span className={`${styles.bigWord} ${styles.row1}`}>STRIVE</span>
-          <span className={`${styles.bigWord} ${styles.row2}`}>STRIVE</span>
-          <span className={`${styles.bigWord} ${styles.row3}`}>STRIVE</span>
-          <span className={`${styles.bigWord} ${styles.row4}`}>STRIVE</span>
-          <span className={`${styles.bigWord} ${styles.row5}`}>STRIVE</span>
-        </div>
+        {/* Stage: STRIVE behind the player; halo is its own object */}
+        <div className={styles.stage}>
+          {/* Standalone, player-centered halo */}
+          <div className={styles.wordHalo} aria-hidden></div>
 
-        {/* Player */}
-        <div
-          className={styles.playerWrap}
-          style={{ "--player-url": "url('/images/player.webp')" }}
-        >
-          <div className={styles.groundShadow} aria-hidden></div>
-          <div className={styles.playerSilhouette} aria-hidden />
-          <Image
-            src="/images/player.webp"
-            alt="Richmond FC player"
-            width={620}
-            height={820}
-            priority
-            className={styles.player}
-          />
+          {/* STRIVE 5-line converge/diverge animation */}
+          <div aria-hidden className={styles.bigWordGroup}>
+            <span className={`${styles.bigWord} ${styles.row1}`}>STRIVE</span>
+            <span className={`${styles.bigWord} ${styles.row2}`}>STRIVE</span>
+            <span className={`${styles.bigWord} ${styles.row3}`}>STRIVE</span>
+            <span className={`${styles.bigWord} ${styles.row4}`}>STRIVE</span>
+            <span className={`${styles.bigWord} ${styles.row5}`}>STRIVE</span>
+          </div>
+
+          {/* Player */}
+          <div
+            className={styles.playerWrap}
+            style={{ "--player-url": "url('/images/player.webp')" }}
+          >
+            <div className={styles.groundShadow} aria-hidden></div>
+            <div className={styles.playerSilhouette} aria-hidden />
+            <Image
+              src="/images/player.webp"
+              alt="Richmond FC player"
+              width={620}
+              height={820}
+              priority
+              className={styles.player}
+            />
+          </div>
         </div>
 
         {/* Copy + CTAs */}
