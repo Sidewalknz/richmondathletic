@@ -41,8 +41,7 @@ export default function DevelopmentProgramme() {
                   <strong>2011–2013</strong>.
                 </li>
                 <li>
-                  <strong>Girls:</strong> Girls-only sessions with our women’s coaches
-                  for <strong>12yrs+</strong>.
+                  <strong>Note:</strong> Girls only sessions will also be run with our women's coaches for any girls aged 12yrs+
                 </li>
                 <li>
                   <strong>Cost:</strong> <strong>$80 per term</strong>.
