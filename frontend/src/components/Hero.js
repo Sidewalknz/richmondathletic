@@ -149,7 +149,7 @@ export default function Hero({ players = [], cycleMs = 6000 }) {
         {/* Copy + CTAs */}
         <div className={styles.content}>
           <p className={styles.lead}>
-            Richmond FC is built on <strong>STRIVE</strong> — Support, Together, Respect, Integrity, Vision, Everyone.
+            Richmond FC is built on <strong>STRIVE</strong> - Support, Together, Respect, Integrity, Vision, Everyone.
           </p>
           <div className={styles.actions}>
             <a href="/registration" className={styles.primaryCta}>2026 Registration</a>
