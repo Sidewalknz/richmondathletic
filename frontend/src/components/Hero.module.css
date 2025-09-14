@@ -48,6 +48,9 @@
   --player-width: min(44vw, 520px);
   --halo-core: calc(var(--player-width) * 0.35);
   --halo-soft: calc(var(--halo-core) + 260px);
+  /* optional: tweak entire cycle length */
+  --strive-cycle: 4.6s;
+
   position: relative;
   display: grid;
   place-items: center;
@@ -100,13 +103,41 @@
   transform-origin: center;
 }
 
+/* Rows 1/2/4/5: hidden while approaching center, visible at center with
+   controllable opacity, then hold at home and fade smoothly.
+   1 & 5 fade earlier than 2 & 4. */
 .row1, .row2, .row4, .row5 {
-  animation: converge-diverge 4s ease-in-out infinite;
+  --row-visible-opacity: 0.8;
+  animation-duration: var(--strive-cycle);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
 }
 
-@keyframes converge-diverge {
-  0%, 100% { transform: translateY(0); opacity: 0.2; }
-  50% { transform: translateY(calc(var(--row-shift, 0) * -1)); opacity: 1; }
+.row1, .row5 { animation-name: converge-diverge-early; } /* earlier fade */
+.row2, .row4 { animation-name: converge-diverge-late; }  /* later fade */
+
+/* EARLY fade for rows 1 & 5 */
+@keyframes converge-diverge-early {
+  0%   { transform: translateY(0); opacity: 0; }
+  49%  { opacity: 0; } /* hidden during approach */
+  50%  { transform: translateY(calc(var(--row-shift, 0) * -1)); opacity: var(--row-visible-opacity, 0.8); } /* show at center */
+  85%  { opacity: var(--row-visible-opacity, 0.8); } /* hold while returning */
+  93%  { transform: translateY(0); opacity: var(--row-visible-opacity, 0.8); animation-timing-function: cubic-bezier(0.22,0.61,0.36,1); } /* arrive home */
+  96%  { opacity: calc(var(--row-visible-opacity, 0.8) * 0.75); }
+  98.5%{ opacity: calc(var(--row-visible-opacity, 0.8) * 0.4); }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+/* LATE fade for rows 2 & 4 */
+@keyframes converge-diverge-late {
+  0%   { transform: translateY(0); opacity: 0; }
+  49%  { opacity: 0; }
+  50%  { transform: translateY(calc(var(--row-shift, 0) * -1)); opacity: var(--row-visible-opacity, 0.8); }
+  85%  { opacity: var(--row-visible-opacity, 0.8); }
+  96%  { transform: translateY(0); opacity: var(--row-visible-opacity, 0.8); animation-timing-function: cubic-bezier(0.22,0.61,0.36,1); }
+  98.5%{ opacity: calc(var(--row-visible-opacity, 0.8) * 0.55); }
+  100% { transform: translateY(0); opacity: 0; }
 }
 
 .row1 { --row-shift: -230%; }
@@ -114,6 +145,12 @@
 .row3 {}
 .row4 { --row-shift: 115%; }
 .row5 { --row-shift: 230%; }
+
+/* Per-row visible opacities */
+.row1 { --row-visible-opacity: 0.4; }
+.row2 { --row-visible-opacity: 0.75; }
+.row4 { --row-visible-opacity: 0.75; }
+.row5 { --row-visible-opacity: 0.4; }
 
 .playerWrap {
   position: relative;
@@ -223,6 +260,8 @@
     --player-width: min(70vw, 420px);
     --halo-core: calc(var(--player-width) * 0.42);
     --halo-soft: calc(var(--halo-core) + 260px);
+    /* optional: a touch faster on mobile */
+    /* --strive-cycle: 4.4s; */
   }
 
   .bigWord { font-size: clamp(2.2rem, 18vw, 6rem); }
