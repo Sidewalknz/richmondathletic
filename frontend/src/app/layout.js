@@ -1,5 +1,5 @@
 // src/app/layout.js
-import { Geist, Geist_Mono, Oswald, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, Oswald, Montserrat, Qwitcher_Grypen } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
@@ -25,6 +25,14 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+// Signature: Qwitcher Grypen
+const qwitcher = Qwitcher_Grypen({
+  variable: "--font-signature",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
 export const metadata = {
   title: "Richmond Athletic",
   description: "Official website for Richmond Athletic Football Club",
@@ -34,7 +42,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} ${montserrat.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} ${montserrat.variable} ${qwitcher.variable}`}
       >
         <Navbar />
         <main>{children}</main>

@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import HeroWithPlayers from "@/components/HeroWithPlayers";
 import MarqueeSection from "@/components/MarqueeSection";
 import Footer from "@/components/Footer";
 import StriveSection from "@/components/StriveSection";
@@ -10,7 +10,7 @@ import SocialCTA from "@/components/SocialCTA";
 export default function Home() {
   return (
     <main>
-      <Hero />
+      <HeroWithPlayers />
       <MarqueeSection />
       <StriveSection />
       <BadgeInfo />
