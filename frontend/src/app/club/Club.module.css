@@ -1,0 +1,57 @@
+.page { background: var(--white); color: var(--black); }
+
+/* width cap */
+.inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ---------- Masthead (kept) ---------- */
+.masthead {
+  position: relative;
+  background: linear-gradient(180deg, #EA2225 0%, #d71e21 100%);
+  color: var(--white);
+  padding: 140px 0 56px; /* room for fixed navbar */
+  overflow: hidden;
+}
+.mastheadTexture {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0 40px, transparent 40px 100px);
+  opacity: 0.18; pointer-events: none;
+}
+.mastheadContent { display: grid; gap: 1rem; align-items: start; }
+.title {
+  font-family: var(--font-oswald), sans-serif;
+  font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; margin: 0;
+}
+.lead { max-width: 72ch; opacity: 0.95; margin: 0; }
+
+/* ---------- Tabs (subnav) ---------- */
+.subnav { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.65rem 1rem; }
+.tab {
+  appearance: none; border: 2px solid rgba(255,255,255,0.8);
+  background: transparent; color: var(--white);
+  padding: 0.45rem 0.8rem; cursor: pointer;
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+  transition: background 0.2s, opacity 0.2s, transform 0.08s;
+}
+.tab:hover { background: rgba(255,255,255,0.12); }
+.tab:active { transform: translateY(1px); }
+.tabActive, .tab[aria-selected="true"] {
+  outline: 2px solid rgba(255,255,255,0.95);
+  outline-offset: 2px;
+}
+
+/* ---------- Generic section styling ---------- */
+.section { position: relative; padding: 3.25rem 0; background: var(--white); color: var(--black); }
+
+.h2 {
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 900;
+  color: var(--red); margin: 0 0 0.5rem 0; font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* helper */
+.muted { margin: 0.25rem 0 0; opacity: 0.7; }
+
+/* hide inactive panels */
+.isHidden { display: none; }
