@@ -1,0 +1,99 @@
+.page { background: var(--white); color: var(--black); }
+
+/* width cap */
+.inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ---------- Masthead ---------- */
+.masthead {
+  position: relative;
+  background: linear-gradient(180deg, #EA2225 0%, #d71e21 100%);
+  color: var(--white);
+  padding: 140px 0 56px; /* space for fixed navbar */
+  overflow: hidden;
+}
+.stripes {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0 40px, transparent 40px 100px);
+  opacity: 0.18; pointer-events: none;
+}
+.mastheadContent { display: grid; gap: 1rem; align-items: start; }
+.title {
+  font-family: var(--font-oswald), sans-serif;
+  font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; margin: 0;
+}
+.lead { max-width: 72ch; opacity: 0.95; margin: 0; }
+
+/* ---------- Sections ---------- */
+.section { position: relative; padding: 3.25rem 0; background: var(--white); color: var(--black); }
+.sectionAlt {
+  position: relative; padding: 3.25rem 0;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,0.06), transparent 60%), var(--white);
+  border-top: 6px solid var(--black);
+}
+
+.h2, .h3 {
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 900;
+  color: var(--red); margin: 0 0 0.5rem 0;
+}
+.h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.h3 { font-size: clamp(1.1rem, 2.2vw, 1.4rem); }
+.p { margin: 0; max-width: 70ch; }
+
+/* ---------- Buttons ---------- */
+.ctaRow { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.75rem; }
+.primaryBtn, .secondaryBtn {
+  display: inline-block; text-decoration: none; padding: 0.65rem 1.1rem;
+  text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800;
+  transition: transform .08s ease, opacity .2s ease, background .2s ease;
+}
+.primaryBtn { background: var(--black); color: var(--white); border: 2px solid var(--black); }
+.secondaryBtn { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.85); }
+.primaryBtn:hover, .secondaryBtn:hover { opacity: .92; }
+.primaryBtn:active, .secondaryBtn:active { transform: translateY(1px); }
+
+/* when buttons are used on white backgrounds */
+.section .secondaryBtn { color: var(--black); border-color: rgba(0,0,0,.85); }
+
+/* ---------- Notes / Deadline ---------- */
+.deadline { margin: 0.25rem 0 0; font-weight: 700; }
+.note { margin-top: 0.5rem; font-size: 0.95rem; opacity: 0.9; }
+
+/* ---------- Fees ---------- */
+.feeGrid {
+  list-style: none; padding: 0; margin: 0.5rem 0 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem;
+}
+@media (max-width: 640px) { .feeGrid{ grid-template-columns: 1fr; } }
+.feeItem {
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem;
+  border: 3px solid var(--black); background: var(--white);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.12); padding: 0.7rem 0.9rem;
+}
+.feeGroup { font-weight: 700; }
+.feeAmount { font-weight: 900; color: var(--red); }
+
+/* ---------- Layout helpers ---------- */
+.split {
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.25rem; align-items: start;
+}
+@media (max-width: 900px) { .split{ grid-template-columns: 1fr; } }
+
+.richText p { margin: 0 0 0.6rem 0; }
+.bullets { list-style: disc; padding-left: 1.2rem; margin: 0 0 0.5rem 0; }
+.bullets li { margin: 0.25rem 0; }
+.link { color: var(--black); text-decoration: underline; }
+
+/* ---------- Side box ---------- */
+.sideBox {
+  border: 3px solid var(--black); background: var(--white);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.12); padding: 1rem;
+}
+
+/* ---------- Bank details ---------- */
+.bankBox {
+  border: 3px solid var(--black); background: #fbfbfb;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.12); padding: 1rem;
+}
+.bankLine { margin: 0.4rem 0 0; font-size: 1.05rem; }
