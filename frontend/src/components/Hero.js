@@ -25,12 +25,12 @@ export default function Hero() {
         {/* Player */}
         <div
           className={styles.playerWrap}
-          style={{ "--player-url": "url('/images/player.png')" }}
+          style={{ "--player-url": "url('/images/player.webp')" }}
         >
           <div className={styles.groundShadow} aria-hidden></div>
           <div className={styles.playerSilhouette} aria-hidden />
           <Image
-            src="/images/player.png"
+            src="/images/player.webp"
             alt="Richmond FC player"
             width={620}
             height={820}

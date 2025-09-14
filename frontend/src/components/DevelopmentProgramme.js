@@ -66,7 +66,7 @@ export default function DevelopmentProgramme() {
               <div className={styles.radial} aria-hidden></div>
               <div className={styles.groundShadow} aria-hidden></div>
               <Image
-                src="/images/player.png"
+                src="/images/player.webp"
                 alt="Richmond FC player"
                 width={620}
                 height={820}
