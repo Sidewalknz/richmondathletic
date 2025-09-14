@@ -151,7 +151,7 @@ export default function RegistrationPage() {
             <div className={styles.split}>
               <div className={styles.richText}>
                 <p>
-                  We value our non-playing members — volunteers, supporters, and whānau. Using{" "}
+                  We value our non-playing members, volunteers, supporters, and whānau. Using{" "}
                   <strong>Sporty</strong>, you can register as a club member and link your details to
                   NZF.
                 </p>
