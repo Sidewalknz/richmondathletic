@@ -315,7 +315,25 @@
     --halo-soft: calc(var(--halo-core) + 260px);
   }
 
-  .bigWord { font-size: clamp(2.2rem, 18vw, 6rem); }
+  /* Center the STRIVE stack perfectly and add equal gutters */
+  .bigWordGroup {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 100vw; /* anchor to viewport for symmetry */
+    padding-inline: clamp(12px, 6vw, 28px); /* equal left/right gutters */
+  }
+
+  .bigWord {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(2.2rem, 18vw, 6rem);
+    letter-spacing: clamp(0.06em, 1.4vw, 0.18em); /* slightly tighter on mobile */
+  }
 
   .row1 { --row-shift: -220%; }
   .row2 { --row-shift: -110%; }
