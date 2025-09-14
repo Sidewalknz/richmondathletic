@@ -4,6 +4,9 @@
 .section {
   --gap: 2.25rem;
   --scroll-speed: 40s;
+  /* fixed slot sizes keep the track width stable before images load */
+  --slot-width: 220px;
+  --slot-height: 64px;
 
   position: relative;
   background: var(--black);
@@ -104,47 +107,86 @@
   display: flex;
   align-items: center;
   gap: var(--gap);
-  flex-wrap: nowrap;            /* never wrap to a new line */
-  will-change: transform;
+  flex-wrap: nowrap;
+  will-change: transform, opacity;
+  width: max-content;
+
+  /* animation is defined but paused until "ready" */
   animation-name: scroll-left;
   animation-duration: var(--scroll-speed);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  width: max-content;           /* size to content width */
+  animation-play-state: paused;
+
+  opacity: 0;            /* fade in when ready */
+  filter: blur(1px);     /* slight softening during load */
+}
+.track.ready {
+  animation-play-state: running;
+  opacity: 1;
+  filter: none;
+  transition: opacity 260ms ease, filter 260ms ease;
+}
+.track.loading {
+  /* allow skeletons to be visible even when logos are hidden */
+  pointer-events: none;
 }
 
 /* --- Pause behavior ---------------------------------------------- */
 /* Fallback (older browsers): pause if the whole section is hovered */
-.section:hover .track {
+.section:hover .track.ready {
   animation-play-state: paused;
 }
 
-/* Modern browsers: pause ONLY when a logo is hovered or focused.
-   This overrides the fallback rule above. */
+/* Modern browsers: pause ONLY when a logo is hovered or focused. */
 @supports selector(:has(.x)) {
-  .section:hover .track { animation-play-state: running; } /* undo fallback */
-  .track:has(.logoWrap:hover),
-  .track:has(.logoWrap:focus-within) {
+  .section:hover .track.ready { animation-play-state: running; } /* undo fallback */
+  .track.ready:has(.logoWrap:hover),
+  .track.ready:has(.logoWrap:focus-within) {
     animation-play-state: paused;
   }
 }
 /* ----------------------------------------------------------------- */
 
-/* Logos */
+/* Logos (slot keeps layout stable; skeleton fills slot until image shows) */
 .logoWrap {
-  flex: 0 0 auto;               /* prevent shrinking/wrapping */
+  position: relative;
+  flex: 0 0 var(--slot-width);
+  width: var(--slot-width);
+  height: var(--slot-height);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
+
 .logo {
-  height: 56px;                 /* consistent height */
+  height: calc(var(--slot-height) - 8px);
   width: auto;
+  max-width: calc(var(--slot-width) - 20px);
   display: block;
-  filter: brightness(0) invert(1); /* make most SVGs/PNGs white on dark */
+  filter: brightness(0) invert(1);
   opacity: 0.95;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
+
+/* Skeleton shimmer shown while loading; hidden when track is "ready" */
+.logoSkeleton {
+  position: absolute;
+  inset: 8px;
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,0.06) 0%,
+      rgba(255,255,255,0.12) 35%,
+      rgba(255,255,255,0.06) 70%);
+  background-size: 240% 100%;
+  animation: shimmer 1.1s linear infinite;
+}
+.track.ready .logoSkeleton { display: none; }
+
+/* hide actual images until we’ve started the marquee to avoid jittery width jumps */
+.track.loading .logo { opacity: 0; }
+.track.ready .logo { opacity: 0.95; }
 .logoWrap:hover .logo,
 .logoWrap:focus-within .logo { transform: translateY(-2px); opacity: 1; }
 
@@ -152,6 +194,12 @@
 @keyframes scroll-left {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -120% 0; }
+  100% { background-position: 120% 0; }
 }
 
 /* Note */
@@ -180,9 +228,10 @@
 
 /* Responsive tweaks */
 @media (max-width: 900px) {
-  .logo { height: 48px; }
+  .logo { height: 52px; }
+  .section { --slot-width: 200px; --slot-height: 60px; }
 }
 @media (max-width: 640px) {
-  .section { padding: 2.75rem 1rem; }
+  .section { padding: 2.75rem 1rem; --slot-width: 180px; --slot-height: 56px; }
   .header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./SponsorsSection.module.css";
 
@@ -23,17 +24,37 @@ const sponsors = [
   { src: "/sponsors/waimeaprint.svg", alt: "Waimea Print Express", href: "https://www.waimeaprint.co.nz/" },
   { src: "/sponsors/spark.svg", alt: "Spark Business Hub", href: "https://spark.co.nz/business" },
   { src: "/sponsors/hireahubby.svg", alt: "Hire-A-Hubby", href: "https://hireahubby.co.nz/" },
-  { src: "/sponsors/rata.svg", alt: "Rata (Nelson)", href: "https://ratafoundation.org.nz/" },
+  { src: "/sponsors/rata.svg", alt: "Rata Foundation", href: "https://ratafoundation.org.nz/" },
   { src: "/sponsors/mainland.svg", alt: "Mainland Foundation", href: "https://mainlandfoundation.co.nz/" },
   { src: "/sponsors/pubcharity.svg", alt: "Pub Charity", href: "https://www.pubcharitylimited.org.nz/" },
   { src: "/sponsors/airrescue.svg", alt: "Air Rescue", href: "https://www.airrescueservices.co.nz/" },
 ];
 
-// Optionally add hrefs:
-// { src: "...", alt: "...", href: "https://sponsor.site" }
-
 export default function SponsorsSection() {
+  // Duplicate for seamless loop
   const doubled = [...sponsors, ...sponsors];
+
+  // Start animation after enough images report loaded/errored
+  const total = doubled.length;
+  const threshold = Math.ceil(total * 0.6); // ~60%
+  const loadedRef = useRef(0);
+  const [isReady, setIsReady] = useState(false);
+
+  const markProgress = () => {
+    loadedRef.current += 1;
+    if (!isReady && loadedRef.current >= threshold) setIsReady(true);
+  };
+
+  const handleLoad = () => markProgress();
+  const handleError = () => markProgress();
+
+  // Fallback: if something never fires onLoad (e.g., cached SVG quirks),
+  // flip to ready after a short delay so we don't stay paused forever.
+  useEffect(() => {
+    if (isReady) return;
+    const t = setTimeout(() => setIsReady(true), 1500);
+    return () => clearTimeout(t);
+  }, [isReady]);
 
   return (
     <section className={styles.section} id="sponsors">
@@ -53,10 +74,14 @@ export default function SponsorsSection() {
         </header>
 
         <div className={styles.viewport}>
-          {/* One seamless, continuous row */}
-          <div className={styles.track} aria-label="Sponsor logos scrolling">
+          {/* Seamless track */}
+          <div
+            className={`${styles.track} ${isReady ? styles.ready : styles.loading}`}
+            aria-label="Sponsor logos scrolling"
+          >
             {doubled.map((sp, i) => {
               const isDuplicate = i >= sponsors.length;
+
               const img = (
                 <Image
                   src={sp.src}
@@ -65,15 +90,19 @@ export default function SponsorsSection() {
                   height={80}
                   className={styles.logo}
                   sizes="(max-width: 640px) 50vw, (max-width: 1200px) 25vw, 200px"
-                  priority={i < 4} // front-load a few to avoid initial hitch
+                  priority={i < 6}
+                  onLoad={handleLoad}
+                  onError={handleError}
                 />
               );
+
               return (
                 <div
                   className={styles.logoWrap}
                   key={`${sp.src}-${i}`}
-                  aria-hidden={isDuplicate} // hide duplicate half from AT
+                  aria-hidden={isDuplicate}
                 >
+                  <span className={styles.logoSkeleton} aria-hidden />
                   {sp.href ? (
                     <a
                       href={sp.href}
@@ -91,7 +120,7 @@ export default function SponsorsSection() {
             })}
           </div>
 
-          {/* Reduced-motion fallback grid (only shown when user prefers it) */}
+          {/* Reduced-motion fallback */}
           <div className={styles.gridFallback}>
             {sponsors.map((sp, i) => {
               const img = (
@@ -102,7 +131,7 @@ export default function SponsorsSection() {
                   height={80}
                   className={styles.logo}
                   sizes="(max-width: 640px) 50vw, (max-width: 1200px) 25vw, 200px"
-                  priority={i < 4}
+                  priority={i < 6}
                 />
               );
               return (
