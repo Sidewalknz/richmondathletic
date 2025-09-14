@@ -1,0 +1,110 @@
+.page { background: var(--white); color: var(--black); }
+
+/* cap width */
+.inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ---------- Masthead ---------- */
+.masthead {
+  position: relative;
+  background: linear-gradient(180deg, #EA2225 0%, #d71e21 100%);
+  color: var(--white);
+  padding: 140px 0 56px; /* space for fixed navbar */
+  overflow: hidden;
+}
+.stripes {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0 40px, transparent 40px 100px);
+  opacity: 0.18; pointer-events: none;
+}
+.mastheadContent { display: grid; gap: 1rem; }
+.title {
+  font-family: var(--font-oswald), sans-serif;
+  font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; margin: 0;
+}
+.lead { max-width: 72ch; margin: 0; opacity: 0.95; }
+
+/* ---------- Sections ---------- */
+.section { position: relative; padding: 3.25rem 0; background: var(--white); }
+.sectionAlt {
+  position: relative; padding: 3.25rem 0;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,0.06), transparent 60%), var(--white);
+  border-top: 6px solid var(--black);
+}
+
+.h2, .h3 {
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 900;
+  color: var(--red); margin: 0 0 0.5rem 0;
+}
+.h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.h3 { font-size: clamp(1.05rem, 2.2vw, 1.4rem); }
+
+.p { margin: 0.1rem 0 0.6rem; max-width: 70ch; }
+
+/* ---------- Quick contacts ---------- */
+.cardGrid {
+  list-style: none; padding: 0; margin: 0.5rem 0 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+@media (max-width: 980px){ .cardGrid{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px){ .cardGrid{ grid-template-columns: 1fr; } }
+
+.card {
+ background: var(--white); padding: 1rem 1rem 1rem 0;
+  display: grid; gap: 0.35rem;
+}
+.cardBody { margin: 0; }
+.cardSmall { margin: 0; opacity: 0.9; }
+.link { color: var(--black); text-decoration: underline; }
+
+.smallBtn {
+  justify-self: start;
+  background: var(--black); color: var(--white);
+  border: 2px solid var(--black);
+  text-transform: uppercase; letter-spacing: 0.12em; font-weight: 800;
+  padding: 0.5rem 0.9rem; cursor: pointer;
+  transition: transform .08s ease, opacity .2s ease, background .2s ease;
+}
+.smallBtn:hover { opacity: .92; }
+.smallBtn:active { transform: translateY(1px); }
+
+/* ---------- Form + Map layout ---------- */
+.split {
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.25rem; align-items: start;
+}
+@media (max-width: 960px){ .split{ grid-template-columns: 1fr; } }
+
+/* ---------- Form ---------- */
+.form { display: grid; gap: 0.75rem; }
+.label { display: grid; gap: 0.35rem; font-weight: 700; }
+.input {
+  border: 3px solid var(--black); background: #fff; padding: 0.6rem 0.7rem;
+  font: inherit; color: inherit; outline: none;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.12);
+}
+.textarea { min-height: 180px; resize: vertical; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (max-width: 560px){ .row2{ grid-template-columns: 1fr; } }
+
+.actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.25rem; }
+.primaryBtn, .secondaryBtn {
+  display: inline-block; text-decoration: none; padding: 0.65rem 1.1rem;
+  text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800;
+  transition: transform .08s ease, opacity .2s ease, background .2s ease;
+}
+.primaryBtn { background: var(--black); color: var(--white); border: 2px solid var(--black); }
+.secondaryBtn { background: transparent; color: var(--black); border: 2px solid rgba(0,0,0,.85); }
+.primaryBtn:hover, .secondaryBtn:hover { opacity: .92; }
+.primaryBtn:active, .secondaryBtn:active { transform: translateY(1px); }
+
+.help { margin: 0.35rem 0 0; font-size: 0.95rem; opacity: 0.85; }
+
+/* ---------- Map ---------- */
+.mapWrap {
+  border: 3px solid var(--black); background: #fff;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.12);
+  aspect-ratio: 16/10; overflow: hidden;
+}
+.map { width: 100%; height: 100%; border: 0; }
+.smallNote { margin: 0.5rem 0 0; font-size: 0.95rem; opacity: 0.9; }
