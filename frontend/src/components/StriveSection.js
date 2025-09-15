@@ -5,41 +5,42 @@ import styles from "./StriveSection.module.css";
 const values = [
   {
     letter: "S",
-    title: "Support",
+    title: "SUPPORT",
     text:
-      "Each other on and off the pitch, our physical and mental wellbeing, our refs and supporters.",
+      "Each other on and off the pitch, our physical and mental wellbeing, our Refs and supporters.",
   },
   {
     letter: "T",
-    title: "Together",
+    title: "TOGETHER",
     text:
-      "As a team through the highs and lows, we act in the interests of the team.",
+      "As a team through the highs and lows,\nact in the interests of the team.",
   },
   {
     letter: "R",
-    title: "Respect",
+    title: "RESPECT",
     text:
-      "Ourselves, our opposition and officials — show up with a positive attitude in language and actions.",
+      "Ourselves, show up with a positive attitude, respect our team, refs and supporters with our language and actions.",
   },
   {
     letter: "I",
-    title: "Integrity",
+    title: "INTEGRITY",
     text:
-      "Do the right thing even when out of earshot of the ref. Help out without being asked; encourage and support.",
+      "Do the right thing even when out of earshot of the ref, help out without being asked, encouraging and warm sideline support.",
   },
   {
     letter: "V",
-    title: "Vision",
+    title: "VISION",
     text:
-      "Have goals as a player, participate in training and events, and support the vision of RFC with energy.",
+      "Have goals as a player, participate in training and events, support the vision of RFC with energy.",
   },
   {
     letter: "E",
-    title: "Everyone!",
+    title: "EVERYONE!",
     text:
-      "Football for all — all ages, abilities, gender identities and cultures. Inclusion holds us firm.",
+      "All people are welcome in RFC, all ages, abilities, gender identities and cultures, the exclamation mark holds us firm in our inclusion.",
   },
 ];
+
 
 export default function StriveSection() {
   return (
